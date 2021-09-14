@@ -53,5 +53,5 @@ jobs:
       with:
         app-name: 'Demo-QnACSCB'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_f41d7319d08e4abc9634efc33a9963c4 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e752184a5d0c4f75b3d961653d79c4fd }}
         package: .
