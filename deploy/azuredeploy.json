@@ -80,7 +80,7 @@
             "[resourceId('Microsoft.Web/sites/config', parameters('appName'), 'appsettings')]"
             ],
             "properties": {
-              "packageUri": "[parameters('packageUrl')]"
+                "packageUri": "https://storage.blob.core.windows.net/artifacts/package.zip"
             }
           }
       ]
