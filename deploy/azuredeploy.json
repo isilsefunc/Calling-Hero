@@ -73,14 +73,14 @@
         {
             "name": "MSDeploy",
             "type": "extensions",
-            "location": "[resourceGroup().location]",
-            "apiVersion": "2015-08-01",
+            "location": "eastus",
+            "apiVersion": "2019-04-01",
             "dependsOn": [
               "[resourceId('Microsoft.Web/sites', parameters('appName'))]",
             "[resourceId('Microsoft.Web/sites/config', parameters('appName'), 'appsettings')]"
             ],
             "properties": {
-                "packageUri": "https://storage.blob.core.windows.net/artifacts/package.zip"
+                "packageUri": "https://cscbblob.blob.core.windows.net/artifacts/package.zip"
             }
           }
       ]
