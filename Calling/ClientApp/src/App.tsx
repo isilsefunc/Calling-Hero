@@ -7,21 +7,25 @@ import { reducer } from './core/reducers';
 import thunk from 'redux-thunk';
 import EndCall from './components/EndCall';
 import HomeScreen from './components/HomeScreen';
+import ChatBotScreen from './components/ChatBotScreen';
 import ConfigurationScreen from './containers/Configuration';
 import { v1 as createGUID } from 'uuid';
 import { loadTheme, initializeIcons } from '@fluentui/react';
 import { utils } from './Utils/Utils';
 import { CallEndReason } from '@azure/communication-calling';
 
+
+
 const sdkVersion = require('../package.json').dependencies['@azure/communication-calling'];
 const lastUpdated = `Last Updated ${utils.getBuildTime()} with @azure/communication-calling:${sdkVersion}`;
+
 
 loadTheme({});
 initializeIcons();
 
 const store = createStore(reducer, applyMiddleware(thunk));
 const App = (): JSX.Element => {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState('bot');
   const [callEndReason, setCallEndReason] = useState<CallEndReason | undefined>();
   const [groupId, setGroupId] = useState('');
   const [screenWidth, setScreenWidth] = useState(0);
@@ -52,13 +56,23 @@ const App = (): JSX.Element => {
     return gid;
   };
 
-  const getContent = (): JSX.Element => {
-    if (page === 'home') {
-      return (
-        <HomeScreen
-          startCallHandler={(): void => {
-            window.history.pushState({}, document.title, window.location.href + '?groupId=' + getGroupId());
-          }}
+    const getContent = (): JSX.Element => {
+     if (page === 'home') {
+            return (
+                <HomeScreen
+                    startCallHandler={(): void => {
+                        window.history.pushState({}, document.title, window.location.href + '?groupId=' + getGroupId());
+                    }}
+                />
+            );
+    }
+    else if (page === 'bot') {
+        return (
+            <ChatBotScreen
+                startChatBotHandler={(): void => {
+                    window.history.pushState({}, document.title, window.location.href + '?groupId=' + getGroupId());
+                }}
+                homeHandler={(): void => setPage('home') }
         />
       );
     } else if (page === 'configuration') {
